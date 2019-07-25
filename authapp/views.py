@@ -56,7 +56,7 @@ class EditView(UpdateView):
     success_url = reverse_lazy('main')
 
     def get_context_data(self, **kwargs):
-        context = super(EditView, self).get_context_data(**kwargs)
-        context['title'] = 'Редактирование профиля'
-        context['submit_label'] = 'Применить'
+        context = super(ProductListView, self).get_context_data(**kwargs)
+        context['title'] = 'Админка. Продукты'
+        context['categories'] = ProductCategory.objects.all()
         return context
