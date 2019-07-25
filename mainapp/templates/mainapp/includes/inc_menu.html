@@ -31,4 +31,21 @@
                 Корзина
             </a>
         </div>
+        {% if request.user.is_superuser %}
+        <div class="menu-item">
+            <a href="{% url 'admin_custom:products' %}"
+               class="{% if request.resolver_match.namespace == 'admin_custom' %}
+                        active
+                      {% endif %}">
+                Админка
+            </a>
+        </div>
+        {% endif %}
+    <li>
+        {% if user.is_authenticated %}
+            <a href="{% url 'auth:logout' %}">выйти</a>
+        {% else %}
+            <a href="{% url 'auth:login' %}">войти</a>
+        {% endif %}
+    </li>
 </ul>

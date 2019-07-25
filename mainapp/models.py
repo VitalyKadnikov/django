@@ -18,9 +18,9 @@ class Product(models.Model):
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
 
-    category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE)
+    category = models.ForeignKey(ProductCategory, verbose_name='категория', on_delete=models.CASCADE)
     name = models.CharField(verbose_name='имя продукта', max_length=128)
-    image = models.ImageField(upload_to='products_images', blank=True)
+    image = models.ImageField(upload_to='products_images', verbose_name='картинка', blank=True)
     short_desc = models.CharField(verbose_name='кратко', max_length=60, blank=True)
     description = models.TextField(verbose_name='подробно', blank=True)
     price = models.DecimalField(verbose_name='цена', max_digits=8, decimal_places=2, default=0)
