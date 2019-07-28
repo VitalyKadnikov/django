@@ -19,7 +19,7 @@ class UsersListView(ListView):
 
     @method_decorator(user_passes_test(lambda u: u.is_superuser))
     def dispatch(self, *args, **kwargs):
-        return super(UsersListView, self).dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)
 
 @user_passes_test(lambda u: u.is_superuser)
 class UserCreateView(CreateView):

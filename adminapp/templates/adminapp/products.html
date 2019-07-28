@@ -1,20 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ title }}</title>
-</head>
-<body>
-<h2>Категории</h2>
-{% include 'adminapp/includes/inc_category_menu.html' %}
-<h2>Продукты</h2>
-<a href="{% url 'admin_custom:product_create' %}">Создать новый продукт</a>
-<ul>
-{% for object in object_list %}
-    <li>
-        <a href="{% url 'admin_custom:product_read' object.pk %}">{{ object.name }}</a>
-    </li>
-{% endfor %}
-</ul>
-</body>
-</html>
+{% extends 'adminapp/base.html' %}
+{% load staticfiles %}
+{% load my_tags %}
+
+
+{% block content %}
+    <div class="products_list">
+		<button class="new_product">
+			<a href={% url 'admin:product_create' category.pk %}>новый продукт</a>
+		</button>
+		
+		{% for object in objects %}
+			<div class="product_record {% if not object.is_active %}not_active{% endif %}">
+				<img src="{{ object.image|media_folder_products }}" alt="{{ object.name }}">
+				<div class="product_name">
+					{{ object.name|title }}
+				</div>
+				<div class="product_actions">
+					<button>
+						<a href={% url 'admin:product_read' object.pk %}>подробнее</a>
+					</button>
+					<button>
+						<a href={% url 'admin:product_update' object.pk %}>редактировать</a>
+					</button>
+					<button>
+						<a href={% url 'admin:product_delete' object.pk %}>удалить</a>
+					</button>
+				</div>
+				<div class="summary">
+					<b>цена</b>
+					<p>{{ object.price }} руб</p>
+					<b>количество</b>
+					<p>{{ object.quantity }}</p>
+				</div>
+				<div class="product_desc">
+					{{ object.short_desc|title }}
+				</div>
+			</div>
+		{% endfor%}
+	</div>
+{% endblock %}

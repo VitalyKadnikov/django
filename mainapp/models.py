@@ -8,6 +8,7 @@ class ProductCategory(models.Model):
 
     name = models.CharField(verbose_name='имя', max_length=64, unique=True)
     description = models.TextField(verbose_name='описание', blank=True)
+    is_active = models.BooleanField(verbose_name='категория активна', default=True)
 
     def __str__(self):
         return self.name
@@ -26,6 +27,7 @@ class Product(models.Model):
     price = models.DecimalField(verbose_name='цена', max_digits=8, decimal_places=2, default=0)
     quantity = models.PositiveIntegerField(verbose_name='склад', default=0)
     is_hot = models.BooleanField(verbose_name='горячий продукт', default=False)
+    is_active = models.BooleanField(verbose_name='категория активна', default=True)
 
     def __str__(self):
         return "{} ({})".format(self.name, self.category.name)
